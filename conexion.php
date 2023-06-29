@@ -1,7 +1,7 @@
 <?php
-$host = "localhost:3308";
+$host = "127.0.0.1:3308";
 $db = "email_service";
-$user = "root";
+$user = "cliente";
 $password = "1234";
 
 try {

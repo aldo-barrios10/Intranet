@@ -40,6 +40,8 @@ create user 'cliente'@'%' identified by '1234';
 grant select, insert, update on email_service.* to 'cliente'@'%';
 
 
+
+
 DELIMITER $$
 CREATE PROCEDURE get_nombre(
     IN p_nickname VARCHAR(40),
@@ -53,3 +55,5 @@ BEGIN
     WHERE nickname = p_nickname AND pass = p_pass;
 END$$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE get_nombre TO 'cliente'@'%';
