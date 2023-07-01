@@ -71,7 +71,7 @@ $apellido = $_SESSION['apellido'];
                     <ul class="navbar-nav nav-flex-icons">
 
                         <li>
-                            <a class="nav-link border border-light rounded waves-effect" href="./session_destroy.php"
+                            <a class="nav-link border border-light rounded waves-effect" href="../session_destroy.php"
                                 style="background-color:#e73b3b; color:white; margin-left:10px;">
                                 Cerrar sesión</a>
                         </li>
@@ -97,8 +97,8 @@ $apellido = $_SESSION['apellido'];
                 </a>
                 <a href="#" class="list-group-item active waves-effect ">
                     <i class="fas fa-user mr-3"></i>Perfil</a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-table mr-3"></i>Tablas</a>
+                <a href="noticias.php" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fas fa-table mr-3"></i>Noticias</a>
                 <a href="#" class="list-group-item list-group-item-action waves-effect">
                     <i class="fas fa-money-bill-alt mr-3"></i>Ordenes</a>
 
