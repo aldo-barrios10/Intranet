@@ -5,6 +5,21 @@ $usuario= $_SESSION['usermane'];
 $nombre = $_SESSION['nombre'];
 $apellido = $_SESSION['apellido'];
 
+
+
+try {
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Realizar la consulta SQL
+    $query = "SELECT id_venta,producto, cantidad,fecha FROM ventas where id_vendedor = 1";
+    $statement = $conexion->query($query);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
+}
+
+
 ?>
 
 
@@ -146,7 +161,31 @@ $apellido = $_SESSION['apellido'];
                     <div class="card">
                         <!--Card content-->
                         <div class="card-body">
-                            <canvas id="myChart"></canvas>
+
+                            <?php
+                                // Imprimir los resultados dentro de un div
+                                echo "<div class='tabla-empleados'>";
+                                echo "<table>";
+                                echo "<tr>";
+                                echo "<th>ID</th>";
+                                echo "<th>Producto</th>";
+                                echo "<th>Cantidad</th>";
+                                echo "<th>Fecha</th>";
+                                echo "</tr>";
+                                
+                                foreach ($result as $row) {
+                                    echo "<tr>";
+                                    echo "<td>".$row['id_venta']."</td>";
+                                    echo "<td>".$row['producto']."</td>";
+                                    echo "<td>".$row['cantidad']."</td>";
+                                    echo "<td>".$row['fecha']."</td>";
+                                    echo "</tr>";
+                                }
+                                
+                                echo "</table>";
+                                echo "</div>";
+    
+                             ?>
                         </div>
                     </div>
                     <!--/.Card-->
