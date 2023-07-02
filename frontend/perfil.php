@@ -4,6 +4,8 @@ session_start();
 $usuario= $_SESSION['usermane'];
 $nombre = $_SESSION['nombre'];
 $apellido = $_SESSION['apellido'];
+$id_empleado = $_SESSION['id_empleado'];
+
 
 
 
@@ -11,7 +13,7 @@ try {
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Realizar la consulta SQL
-    $query = "SELECT id_venta,producto, cantidad,fecha FROM ventas where id_vendedor = 1";
+    $query = "SELECT id_venta,producto, cantidad,fecha FROM ventas where id_vendedor = $id_empleado";
     $statement = $conexion->query($query);
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -164,8 +166,8 @@ try {
 
                             <?php
                                 // Imprimir los resultados dentro de un div
-                                echo "<div class='tabla-empleados'>";
-                                echo "<table>";
+                                echo "<div>";
+                                echo "<table class='table'>";
                                 echo "<tr>";
                                 echo "<th>ID</th>";
                                 echo "<th>Producto</th>";

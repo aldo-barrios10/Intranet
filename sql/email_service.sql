@@ -4,7 +4,7 @@ CREATE DATABASE email_service;
 
 USE email_service;
 
-DROP TABLE IF EXISTS `empleados`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 
@@ -63,6 +63,11 @@ insert into `ventas` values (1,1,'Hoja de papel formato A2', '12000', '2023-03-1
                             (4,2,'Hojas de papel formato A4', '1000', '2023-03-12'),
                             (5,2,'Hoja de papel formato A0', '900', '2023-03-12');
 
+insert into `ventas` values (6,3,'Hoja de papel formato A0', '1200', '2023-05-22'),
+							(7,3,'Carpetas plasticas pasta dura', '120', '2023-03-18'),
+                            (8,3,'Archivadores metalicos', '10', '2023-02-14');
+
+
 UNLOCK TABLES;
 
 USE email_service;
@@ -74,17 +79,18 @@ create user 'cliente'@'%' identified by '1234';
 grant select, insert, update on email_service.* to 'cliente'@'%';
 
 
-
+DROP PROCEDURE IF EXISTS get_nombre;
 
 DELIMITER $$
-CREATE PROCEDURE get_nombre(
+create PROCEDURE get_nombre(
     IN p_nickname VARCHAR(40),
     IN p_pass VARCHAR(20),
     OUT p_nombre VARCHAR(40),
-    OUT p_apellido VARCHAR(40)
+    OUT p_apellido VARCHAR(40),
+    out p_id_empleado int
 )
 BEGIN
-    SELECT nombre, apellido INTO p_nombre, p_apellido
+    SELECT nombre, apellido, id_empleado INTO p_nombre, p_apellido, p_id_empleado
     FROM empleados
     WHERE nickname = p_nickname AND pass = p_pass;
 END$$

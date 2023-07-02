@@ -4,6 +4,8 @@ session_start();
 $usuario= $_SESSION['usermane'];
 $nombre = $_SESSION['nombre'];
 $apellido = $_SESSION['apellido'];
+$id_empleado = $_SESSION['id_empleado'];
+
 
 ?>
 
