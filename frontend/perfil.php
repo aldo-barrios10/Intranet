@@ -13,6 +13,25 @@ try {
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Realizar la consulta SQL
+    $query = "SELECT id_sede, id_puesto, telefono, img_perfil FROM empleados where id_empleado = $id_empleado";
+    $statement = $conexion->query($query);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $telefono = $result[0]['telefono'];
+    $sede = $result[0]['id_sede'];
+    $puesto = $result[0]['id_puesto'];
+    $img=$result[0]['img_perfil'];
+
+    $query = "SELECT nombre_puesto FROM puestos where id_puesto = $puesto";
+    $statement = $conexion->query($query);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $puesto = $result[0]['nombre_puesto'];
+
+    $query = "SELECT nombre_sede FROM sedes where id_sede = $sede";
+    $statement = $conexion->query($query);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $sede= $result[0]['nombre_sede'];
+
     $query = "SELECT id_venta,producto, cantidad,fecha FROM ventas where id_vendedor = $id_empleado";
     $statement = $conexion->query($query);
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +52,7 @@ try {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Grupo Palermo</title>
+    <title>Grupo Palermo </title>
     <link rel="shortcut icon" href="../img/logo-2-rbg.png" type="image/png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -151,6 +170,59 @@ try {
 
             </div>
             <!-- Heading -->
+
+
+            <div class="row wow fadeIn">
+                    <div class="card-body" style="padding: 1rem;">
+                        <div class="card mb-3">
+                            <div class="row g-0" style="margin-left:0;">
+                                <div class="col-md-4 text-center text-white"
+                                    style="border-top-left-radius: .3rem; border-bottom-left-radius: .3rem; background-color: #1c5c89;">
+                                    <img src="../bg.jpg"
+                                        alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                                    <h5><?php echo $nombre; ?> <?php echo $apellido; ?></h5>
+                                    <p><?php echo $puesto; ?></p>
+                                    <i class="far fa-edit mb-5"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body p-4">
+                                        <h6>Información</h6>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <h6>Email</h6>
+                                                <p class="text-muted"><?php echo $usuario; ?>@gpp.com.mx</p>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6>Teléfono</h6>
+                                                <p class="text-muted"><?php echo $telefono; ?></p>
+                                            </div>
+                                        </div>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <h6>Sede</h6>
+                                                <p class="text-muted"><?php echo $sede; ?></p>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <h6>Departamento</h6>
+                                                <p class="text-muted"><?php echo $puesto; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-start">
+                                            <a href="#!"><i class="fab fa-facebook-f fa-lg mr-4"></i></a>
+                                            <a href="#!"><i class="fab fa-twitter fa-lg mr-4"></i></a>
+                                            <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+
 
             <!--Grid row-->
             <div class="row wow fadeIn">
@@ -413,17 +485,6 @@ try {
         $('#sideModalTLInfoDemo').modal('show');
     });
     </script>
-
-
 </body>
-
 </html>
-
-
-
-<?php
-
-
-
-
-?>
+<?php?>

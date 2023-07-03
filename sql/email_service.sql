@@ -15,16 +15,28 @@ create table `puestos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+
+create table  `sedes`(
+	`id_sede` int not null auto_increment,
+     `nombre_sede` char(40) not null,
+     primary key(`id_sede`)
+)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+drop table if exists empleados;
 CREATE TABLE `empleados` (
   `id_empleado` int NOT NULL AUTO_INCREMENT,
   `nombre` char(20) NOT NULL,
   `apellido` char(20) NOT NULL,
-  `nickname` char(20) NOT NULL,
+  `nickname` char(20) NOT NULL unique,
   `cuenta` char(40) NOT NULL,
+  `telefono` char(12) not null,
   `pass` char(20) NOT NULL,
   `id_puesto` int not null,
+  `id_sede` int not null,
+  `img_perfil` varchar(80),
   PRIMARY KEY (`id_empleado`),
-  foreign key(`id_puesto`) REFERENCES puestos(`id_puesto`)
+  foreign key(`id_puesto`) REFERENCES puestos(`id_puesto`),
+  foreign key(`id_sede`) REFERENCES sedes(`id_sede`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -48,14 +60,19 @@ insert into `puestos` values (1,'director general'),
                              (5,'ventas'),
                              (6,'soporte'),
                              (7,'recursos humanos');
+                             
+insert into `sedes` values(1,'Centro CDMX'),
+						   (2,'Centro Monterrey'),
+                           (3,'Centro Queretaro'),
+                           (4,'Centro Veracruz'),
+                           (5,'Centro Jalisco');
 
-
-INSERT INTO `empleados` VALUES (1,'Carlos','Boitizr','caboitizr','caboitizr@gpp.com.mx','1234',5),
-							(2,'Lurdez','Martínez','lmartinezg','lmartinezg@gpp.com.mx','1234',5),
-							(3,'Oscar','Chanona','ochanonaa','ochanonaa@gpp.com.mx','1234',5),
-							(4,'Pedro','Díaz','pdiazb','pdiazb@gpp.com.mx','1234',5),
-							(5,'Susana','Franco','sfrancof','sfrancof@gpp.com.mx','1234',5),
-							(6,'Tomás','Barrientos','tbarrientosf','tbarrientosf@gpp.com.mx','1234',5);
+INSERT INTO `empleados` VALUES (1,'Carlos','Boitizr','caboitizr','caboitizr@gpp.com.mx','55 112233 44','1234',5,1,'C:\Users\aldo_\OneDrive\Fotos\perfil.jpg'),
+							(2,'Lurdez','Martínez','lmartinezg','lmartinezg@gpp.com.mx','55 112233 44','1234',5,2,'C:\Users\aldo_\OneDrive\Fotos\perfil.jpg'),
+							(3,'Oscar','Chanona','ochanonaa','ochanonaa@gpp.com.mx','55 112233 44','1234',5,3,'C:\Users\aldo_\OneDrive\Fotos\perfil.jpg'),
+							(4,'Pedro','Díaz','pdiazb','pdiazb@gpp.com.mx','55 112233 44','1234',5,4,'C:\Users\aldo_\OneDrive\Fotos\perfil.jpg'),
+							(5,'Susana','Franco','sfrancof','sfrancof@gpp.com.mx','55 112233 44','1234',5,5,'C:\Users\aldo_\OneDrive\Fotos\perfil.jpg'),
+							(6,'Tomás','Barrientos','tbarrientosf','tbarrientosf@gpp.com.mx','55 112233 44','1234',5,1,'C:\Users\aldo_\OneDrive\Fotos\perfil.jpg');
                             
 insert into `ventas` values (1,1,'Hoja de papel formato A2', '12000', '2023-03-12'),
 							(2,1,'Plumas fuente metalicas', '200', '2023-03-12'),
@@ -71,12 +88,6 @@ insert into `ventas` values (6,3,'Hoja de papel formato A0', '1200', '2023-05-22
 UNLOCK TABLES;
 
 USE email_service;
-
-create user 'cliente'@'%' identified by '1234';
-grant select, insert, update on email_service.* to 'cliente'@'%';
-
-create user 'cliente'@'%' identified by '1234';
-grant select, insert, update on email_service.* to 'cliente'@'%';
 
 
 DROP PROCEDURE IF EXISTS get_nombre;
