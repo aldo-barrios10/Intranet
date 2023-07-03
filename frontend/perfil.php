@@ -116,9 +116,6 @@ try {
                     <i class="fas fa-user mr-3"></i>Perfil</a>
                 <a href="noticias.php" class="list-group-item list-group-item-action waves-effect">
                     <i class="fas fa-table mr-3"></i>Noticias</a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-money-bill-alt mr-3"></i>Ordenes</a>
-
             </div>
 
         </div>
